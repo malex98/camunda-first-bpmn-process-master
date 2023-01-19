@@ -1,37 +1,37 @@
 <form role="form">
 
     <script cam-script type="text/form-script">
-   inject(['$rootScope', function($rootScope) {
-      $scope.userName = $rootScope.authentication.name;
-    }]);
-  $scope.open1 = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
+        inject(['$rootScope', function($rootScope) {
+            $scope.userName = $rootScope.authentication.name;
+        }]);
+        $scope.open1 = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
 
-    $scope.dateFieldOpened1 = true;
-  };
-  $scope.open2 = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
+            $scope.dateFieldOpened1 = true;
+        };
+        $scope.open2 = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
 
-    $scope.dateFieldOpened2 = true;
-  };
+            $scope.dateFieldOpened2 = true;
+        };
 
-      var dataObject = $scope.dataObject = {
-         employee: $scope.userName
-      };
-  camForm.on('form-loaded', function() {
-    camForm.variableManager.createVariable({
-      name: 'application',
-      type: 'Object',
-      value: dataObject,
-      valueInfo: {
-        serializationDataFormat: 'application/json',
-        objectTypeName: 'bpmn2.storm.backend.model.BusinessTrip'
-      }
-    });
-  });
-</script>
+        var dataObject = $scope.dataObject = {
+            employee: $scope.userName
+        };
+        camForm.on('form-loaded', function() {
+            camForm.variableManager.createVariable({
+                name: 'application',
+                type: 'Object',
+                value: dataObject,
+                valueInfo: {
+                    serializationDataFormat: 'application/json',
+                    objectTypeName: 'bpmn2.storm.backend.model.BusinessTrip'
+                }
+            });
+        });
+    </script>
     <div class="col-xs-6">
         <h3 ng-show=${1<2}>Ввод КПИ</h3>
     </div>
@@ -66,33 +66,152 @@
             </div>
         </div>
         <div ng-show=dataObject.stg(1)>
-            <b>Наименование изделия: </b>{{pkim.naim}}<br><b>Обозначение изделия: </b>{{pkim.obozn}}<br><b>Заказ </b>{{pkim.zakaz}}<br>
+            <b>Наименование изделия: </b>{{dataObject.naim}}<br><b>Обозначение изделия: </b>{{dataObject.obozn}}<br><b>Заказ </b>{{dataObject.zakaz}}<br>
         </div>
-        <label class="control-label" for="reason">Reason*</label>
-        <br>
-        <textarea cam-variable-name="dataObject.reason"
-                  style="width:100%"
-                  required
-                  id="reason"
-                  cam-variable-type="String">
-</textarea>
-        <label class="control-label" for="employee">Employee*</label>
-        <div class="controls">
-            <input id="employee"
-                   class="form-control"
-                   type="text"
-                   required
-
-                   ng-model="dataObject.employee">
+        <table>
+            <tr>
+                <th colspan="4">Требование КД (ВСНРМ)</th>
+            </tr>
+            <tr>
+                <th>Марка материала</th>
+                <th>Кол., кг</th>
+                <th>Стоимость, руб</th>
+                <th>∑, руб</th>
+            </tr>
+            <tr ng-show=dataObject.ste(1)>
+                <td>
+                    <textarea ng-model="dataObject.material1"></textarea>
+                </td>
+                <td>
+                    <input type="text" ng-model="dataObject.kol1"> </td>
+                <td>
+                    <input type="number" ng-model="dataObject.stoim1"> </td>
+                <td>
+                    <input type="number" ng-model="dataObject.itog1"> </td>
+            </tr>
+            <tr ng-show=dataObject.stg(1)>
+                <td>
+                    <textarea ng-model="dataObject.material1" readonly></textarea>
+                </td>
+                <td>{{dataObject.kol1}}</td>
+                <td>{{dataObject.stoim1}}</td>
+                <td>{{dataObject.itog1}}</td>
+            </tr>
+            <tr>
+                <th colspan="4">Разрешено</th>
+            </tr>
+            <tr>
+                <th>Марка материала</th>
+                <th>Кол., кг</th>
+                <th>Стоимость, руб</th>
+                <th>∑, руб</th>
+            </tr>
+            <tr ng-show=dataObject.ste(1)>
+                <td>
+                    <textarea ng-model="dataObject.material2"></textarea>
+                </td>
+                <td>
+                    <input type="text" ng-model="dataObject.kol2"> </td>
+                <td>
+                    <input type="number" ng-model="dataObject.stoim2"> </td>
+                <td>
+                    <input type="number" ng-model="dataObject.itog2"> </td>
+            </tr>
+            <tr ng-show=dataObject.stg(1)>
+                <td>
+                    <textarea ng-model="dataObject.material2" readonly></textarea>
+                </td>
+                <td>{{dataObject.kol2}}</td>
+                <td>{{dataObject.stoim2}}</td>
+                <td>{{dataObject.itog2}}</td>
+            </tr>
+        </table>
+        <div ng-show=dataObject.ste(5)>
+            <hr><b>Техническое заключение</b>
+            <p>
+                <textarea rows="7" cols="80" name="text" ng-model="dataObject.to_zakl"></textarea>
+            </p> Загрузка тех.процесса
+            <input type="file" accept=".pdf" cam-variable-name="TP_DOCUMENT" cam-variable-type="File"></input>
+            <br> Загрузка эскиза
+            <input type="file" cam-variable-name="ES_DOCUMENT" cam-variable-type="File"></input>
+            <br>
+            <input type="checkbox" ng-model=dataObject.is_so>Требуется согласование с заказчиком</input>
+            <br>
+            <input type="checkbox" ng-model=dataObject.is_tr>Требуется расчёт дополнительной трудоёмкости</input>
+            <br> </div>
+        <div ng-show=dataObject.stg(5)>
+            <hr><b>Техническое заключение</b>
+            <p>
+                <textarea rows="7" cols="80" name="text" ng-model="dataObject.to_zakl" readonly></textarea>
+            </p>
+            <div ng-show="dataObject.is_tp">
+                <a cam-file-download="TP_DOCUMENT">Тех.процесс</a><br>
+            </div>
+            <div ng-show="dataObject.is_es">
+                <a cam-file-download="ES_DOCUMENT">Эскиз</a><br>
+            </div>
+            <div ng-show="dataObject.is_so">
+                <input type="checkbox" ng-model=dataObject.is_so disabled="disabled">Требуется согласование с заказчиком</input><br>
+            </div>
+            <div ng-show="dataObject.is_tr">
+                <input type="checkbox" ng-model=dataObject.is_tr disabled="disabled" ng-show="dataObject.is_tr">Требуется расчёт дополнительной трудоёмкости</input><br>
+            </div>
         </div>
-        <label class="control-label" for="amount">Amount*</label>
-        <div class="controls">
-            <input id="amount"
-                   class="form-control"
-                   type="text"
-                   required
-                   cam-variable-type="Long"
-                   ng-model="dataObject.amount">
+        <div ng-show=dataObject.ste(7)>
+            <hr>Загрузка документа согласования с заказчиком
+            <input type="file" accept=".pdf" cam-variable-name="SO_DOCUMENT" cam-variable-type="File"></input><br>
+        </div>
+        <div ng-show=dataObject.stg(7,dataObject.is_so)>
+            <hr><a cam-file-download="SO_DOCUMENT">Согласование с заказчиком</a></div>
+        <div ng-show=dataObject.ste(8)>
+            <hr><b>Дополнительная трудоёмкость </b>
+            <input type="text" name="trud" size="100" ng-model="dataObject.trud"> </div>
+        <div ng-show=dataObject.stg(8,dataObject.is_tr)>
+            <hr><b>Дополнительная трудоёмкость </b>{{dataObject.trud}}</div>
+        <div ng-show=dataObject.stg(8)>
+            <hr>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>ОМТС</th>
+                    <th>ТОиМ</th>
+                    <th>Итого</th>
+                </tr>
+                <tr ng-show=dataObject.ste(9)>
+                    <th>Материалы, руб</th>
+                    <td>
+                        <input type="number" name="peo_mat1" ng-model="dataObject.peo_mat1"> </td>
+                    <td>
+                        <input type="number" name="peo_mat2" ng-model="dataObject.peo_mat2"> </td>
+                    <td>{{dataObject.peo_mat1+dataObject.peo_mat2}}</td>
+                </tr>
+                <tr ng-show=dataObject.stg(9)>
+                    <th>Материалы, руб</th>
+                    <td>{{dataObject.peo_mat1}}</td>
+                    <td>{{dataObject.peo_mat2}}</td>
+                    <td>{{dataObject.peo_mat1+dataObject.peo_mat2}}</td>
+                </tr>
+                <tr ng-show=dataObject.ste(9)>
+                    <th>Заработная плата и<br>отчисления, руб</th>
+                    <td>
+                        <input type="number" name="peo_zar1" ng-model="dataObject.peo_zar1"> </td>
+                    <td>
+                        <input type="number" name="peo_zar2" ng-model="dataObject.peo_zar2"> </td>
+                    <td>{{dataObject.peo_zar1+dataObject.peo_zar2}}</td>
+                </tr>
+                <tr ng-show=dataObject.stg(9)>
+                    <th>Заработная плата и<br>отчисления, руб</th>
+                    <td>{{dataObject.peo_zar1}}</td>
+                    <td>{{dataObject.peo_zar2}}</td>
+                    <td>{{dataObject.peo_zar1+dataObject.peo_zar2}}</td>
+                </tr>
+                <tr>
+                    <th>Итого</th>
+                    <td>{{dataObject.peo_mat1+dataObject.peo_zar1}}</td>
+                    <td>{{dataObject.peo_mat2+dataObject.peo_zar2}}</td>
+                    <th>{{dataObject.peo_mat1+dataObject.peo_zar1+dataObject.peo_mat2+dataObject.peo_zar2}}</th>
+                </tr>
+            </table>
         </div>
     </div>
 </form>
