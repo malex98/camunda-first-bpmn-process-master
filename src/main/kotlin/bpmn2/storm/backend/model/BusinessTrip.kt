@@ -17,5 +17,5 @@ data class BusinessTrip(
     val tripProblemComment: String? = null,
     val flyDescription: String? =  null,
     val hotelDescription: String? = null
-        )
+)
 
