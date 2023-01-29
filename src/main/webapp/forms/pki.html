@@ -1,79 +1,80 @@
 <form role="form">
-
+    <style>
+        table,th,td {
+			border: 1px solid grey;
+			border-collapse: collapse;
+			padding: 5px;
+			border-width: 1px;
+		}
+	    table tr:nth-child(odd) {
+			background-color: #f2f2f2;
+		}
+		table tr:nth-child(even) {
+			background-color: #ffffff;
+		}
+    </style>
     <script cam-script type="text/form-script">
         inject(['$rootScope', function($rootScope) {
             $scope.userName = $rootScope.authentication.name;
         }]);
-        $scope.open1 = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.dateFieldOpened1 = true;
-        };
-        $scope.open2 = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.dateFieldOpened2 = true;
-        };
         $scope.ste = function(fun_step) {
-            return $scope.process_step == fun_step;
+            return $scope.dataObject.st == fun_step;
 		};
 		$scope.stg = function(fun_step, b=true) {
-			return $scope.process_step > fun_step && b;
+			return $scope.dataObject.st > fun_step && b;
 		};
-        var dataObject = $scope.dataObject = {
-            employee: $scope.userName
-        };
-        camForm.on('form-loaded', function() {
-            camForm.variableManager.createVariable({
-                name: 'application',
-                type: 'Object',
-                value: dataObject,
-                valueInfo: {
-                    serializationDataFormat: 'application/json',
-                    objectTypeName: 'bpmn2.storm.backend.model.PKI'
-                }
-            });
+		camForm.on('form-loaded', function() {
+            camForm.variableManager.fetchVariable('application');
         });
-        angular.module("mainApp", []).controller('pkimController', ['$scope', function($scope) {
-			$scope.pkim = {
-		        st: 1,
-				naim: "Наименование изделия",
-				obozn: "Обозначение",
-				zakaz: "Номер заказа",
-				material1: "c1",
-				material2: "c5",
-				kol1: "c2",
-				kol2: "c6",
-				stoim1: 3,
-				stoim2: 7,
-				itog1: 4,
-				itog2: 8,
-				to_zakl: "Тех.заключение",
-				to_sogl: "",
-				peo_mat1: 2,
-				peo_mat2: 5,
-				peo_zar1: 7,
-				peo_zar2: 11,
-				is_tp: true,
-				is_es: false,
-				is_so: false,
-				is_tr: false,
-				trud: "Труд",
-				ste: function(fun_step) {
-				    return $scope.pkim.st == fun_step;
-				},
-				stg: function(fun_step, b=true) {
-					return $scope.pkim.st > fun_step && b;
-				}
-			};
-    	}]);
+        camForm.on('variables-restored', function() {
+            $scope.dataObject = camForm.variableManager.variableValue('application');
+            switch($scope.dataObject.st) {
+                case 1: {$scope.items = [{id: 2, label: 'Подписать'}, {id: 0, label: 'Удалить'}]; break;}
+                case 2: {$scope.items = [{id: 3, label: 'Подписать'}, {id: 1, label: 'Вернуть на доработку инженеру ОМТС'}]; break;}
+                case 3: {$scope.items = [{id: 4, label: 'Подписать'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 4: {$scope.items = [{id: 5, label: 'Подписать'}, {id: 3, label: 'Вернуть на доработку конструктору'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 5: {$scope.items = [{id: 6, label: 'Подписать'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 6: {$scope.items = [{id: 7, label: 'Подписать'}, {id: 5, label: 'Вернуть на доработку технологу'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 7: {$scope.items = [{id: 8, label: 'Согласовано'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 8: {$scope.items = [{id: 9, label: 'Подписать'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 9: {$scope.items = [{id: 10, label: 'Подписать'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 10: {$scope.items = [{id: 11, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 11: {$scope.items = [{id: 12, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                default: {$scope.items = [{id: 13, label: 'Утвердить'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+            }
+        });
     </script>
+    <b>Номер ПКИ: </b>{{dataObject.nomer}}<br>
     <div class="control-group" >
-        <b>Наименование изделия: </b>{{dataObject.naim}}<br><b>Обозначение изделия: </b>{{dataObject.obozn}}<br><b>Заказ </b>{{dataObject.zakaz}}<br>
+        <label class="control-label" for="zakaz">Номер заказа*</label>
+        <div class="controls">
+            <input id="zakaz"
+                   class="form-control"
+                   type="text"
+                   required
+                   ng-model="dataObject.zakaz">
         </div>
-        <table>
+        <br>
+        <label class="control-label" for="obozn">Обозначение изделия:*</label>
+        <div class="controls">
+            <input id="obozn"
+                   class="form-control"
+                   type="text"
+                   required
+                   ng-model="dataObject.obozn">
+        </div>
+        <br>
+        <label class="control-label" for="naim">Наименование изделия:*</label>
+        <div class="controls">
+            <input id="naim"
+                   class="form-control"
+                   type="text"
+                   required
+                   ng-model="dataObject.naim">
+        </div>
+        <br>
+        </div>
+        <table class="mytable">
             <tr>
                 <th colspan="4">Требование КД (ВСНРМ)</th>
             </tr>
@@ -83,7 +84,7 @@
                 <th>Стоимость, руб</th>
                 <th>∑, руб</th>
             </tr>
-            <tr ng-hide=ste(1)>
+            <tr ng-show=ste(1)>
                 <td>
                     <textarea ng-model="dataObject.material1"></textarea>
                 </td>
@@ -94,7 +95,7 @@
                 <td>
                     <input type="number" ng-model="dataObject.itog1"> </td>
             </tr>
-            <tr ng-hide=stg(1)>
+            <tr ng-show=stg(1)>
                 <td>
                     <textarea ng-model="dataObject.material1" readonly></textarea>
                 </td>
@@ -111,7 +112,7 @@
                 <th>Стоимость, руб</th>
                 <th>∑, руб</th>
             </tr>
-            <tr ng-show=dataObject.ste(1)>
+            <tr ng-show="ste(1)">
                 <td>
                     <textarea ng-model="dataObject.material2"></textarea>
                 </td>
@@ -122,7 +123,7 @@
                 <td>
                     <input type="number" ng-model="dataObject.itog2"> </td>
             </tr>
-            <tr ng-show=dataObject.stg(1)>
+            <tr ng-show="stg(1)">
                 <td>
                     <textarea ng-model="dataObject.material2" readonly></textarea>
                 </td>
@@ -218,5 +219,8 @@
                 </tr>
             </table>
         </div>
+    <label class="control-label" for="choice">Выбор действия*</label>
+    <div class="controls">
+        <select id="choice" ng-options="item as item.label for item in items track by item.id" ng-model="dataObject.selected" required></select>
     </div>
 </form>

@@ -1,0 +1,35 @@
+<form role="form">
+
+  <script cam-script type="text/form-script">
+    inject(['$rootScope', function($rootScope) {$scope.userName = $rootScope.authentication.name;}]);
+    var dataObject = $scope.dataObject = {
+      employee: $scope.userName,
+      st: 1
+    };
+    camForm.on('form-loaded', function() {
+      camForm.variableManager.createVariable({
+        name: 'application',
+        type: 'Object',
+        value: dataObject,
+        valueInfo: {
+          serializationDataFormat: 'application/json',
+          objectTypeName: 'bpmn2.storm.backend.model.PKI'
+        }
+      });
+    });
+  </script>
+  <div class="col-xs-6">
+    <h3>Ввод КПИ</h3>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="from">Номер ПКИ*</label>
+    <div class="controls">
+      <input id="from"
+             class="form-control"
+             type="text"
+             required
+             ng-model="dataObject.nomer">
+    </div>
+    <br>
+  </div>
+</form>

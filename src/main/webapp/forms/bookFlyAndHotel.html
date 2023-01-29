@@ -1,7 +1,18 @@
 <form role="form">
 
     <script cam-script type="text/form-script">
+  $scope.open1 = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
 
+    $scope.dateFieldOpened1 = true;
+  };
+  $scope.open2 = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.dateFieldOpened2 = true;
+  };
   camForm.on('form-loaded', function() {
   camForm.variableManager.fetchVariable('application');
 });
