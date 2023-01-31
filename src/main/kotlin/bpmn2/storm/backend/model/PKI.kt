@@ -1,7 +1,7 @@
 package bpmn2.storm.backend.model
 
 data class PKI (
-    val st: Int = 1,
+    val st: Long = 1,
     val nomer: String="Номер",//номер ПКИ
     val naim: String = "",//наименование изделия
     val obozn: String = "",//Обозначение
@@ -25,5 +25,5 @@ data class PKI (
     val is_so: Boolean = false,
     val is_tr: Boolean = false,
     val trud:  String = "",
-    val selected: Int
+    val selected: Long
 )

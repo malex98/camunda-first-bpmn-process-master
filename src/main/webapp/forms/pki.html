@@ -32,15 +32,15 @@
                 case 1: {$scope.items = [{id: 2, label: 'Подписать'}, {id: 0, label: 'Удалить'}]; break;}
                 case 2: {$scope.items = [{id: 3, label: 'Подписать'}, {id: 1, label: 'Вернуть на доработку инженеру ОМТС'}]; break;}
                 case 3: {$scope.items = [{id: 4, label: 'Подписать'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 4: {$scope.items = [{id: 5, label: 'Подписать'}, {id: 3, label: 'Вернуть на доработку конструктору'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 5: {$scope.items = [{id: 6, label: 'Подписать'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 6: {$scope.items = [{id: 7, label: 'Подписать'}, {id: 5, label: 'Вернуть на доработку технологу'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 7: {$scope.items = [{id: 8, label: 'Согласовано'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 8: {$scope.items = [{id: 9, label: 'Подписать'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 9: {$scope.items = [{id: 10, label: 'Подписать'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 10: {$scope.items = [{id: 11, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 11: {$scope.items = [{id: 12, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                default: {$scope.items = [{id: 13, label: 'Утвердить'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 4: {$scope.items = [{id: 5, label: 'Подписать сразу после согласования'},{id: 6, label: 'Подписать, согласование не требуется'}, {id: 3, label: 'Вернуть на доработку конструктору'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 5: {$scope.items = [{id: 6, label: 'Согласовано'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 6: {$scope.items = [{id: 7, label: 'Подписать'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 7: {$scope.items = [{id: 9, label: 'Подписать, передать в ПЭО'}, {id: 8, label: 'Подписать, передать в группу нормирования'}, {id: 6, label: 'Вернуть на доработку технологу'},, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 8: {$scope.items = [{id: 9, label: 'Подписать'}, {id: 6, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 9: {$scope.items = [{id: 10, label: 'Подписать'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 6, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 10: {$scope.items = [{id: 11, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 6, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 11: {$scope.items = [{id: 12, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 6, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+                default: {$scope.items = [{id: 13, label: 'Утвердить'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 6, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
             }
         });
     </script>
@@ -132,7 +132,13 @@
                 <td>{{dataObject.itog2}}</td>
             </tr>
         </table>
-        <div ng-show=dataObject.ste(5)>
+    <div ng-show=dataObject.ste(5)>
+        <hr>Загрузка документа согласования с заказчиком
+        <input type="file" accept=".pdf" cam-variable-name="SO_DOCUMENT" cam-variable-type="File"></input><br>
+    </div>
+    <div ng-show=dataObject.stg(5,dataObject.is_so)>
+        <hr><a cam-file-download="SO_DOCUMENT2">Согласование с заказчиком</a></div>
+    <div ng-show=dataObject.ste(6)>
             <hr><b>Техническое заключение</b>
             <p>
                 <textarea rows="7" cols="80" name="text" ng-model="dataObject.to_zakl"></textarea>
@@ -141,11 +147,8 @@
             <br> Загрузка эскиза
             <input type="file" cam-variable-name="ES_DOCUMENT" cam-variable-type="File"></input>
             <br>
-            <input type="checkbox" ng-model=dataObject.is_so>Требуется согласование с заказчиком</input>
-            <br>
-            <input type="checkbox" ng-model=dataObject.is_tr>Требуется расчёт дополнительной трудоёмкости</input>
-            <br> </div>
-        <div ng-show=dataObject.stg(5)>
+            <input type="checkbox" ng-model=dataObject.is_so>Требуется согласование с заказчиком</input></div>
+        <div ng-show=dataObject.stg(6)>
             <hr><b>Техническое заключение</b>
             <p>
                 <textarea rows="7" cols="80" name="text" ng-model="dataObject.to_zakl" readonly></textarea>
@@ -156,19 +159,7 @@
             <div ng-show="dataObject.is_es">
                 <a cam-file-download="ES_DOCUMENT2">Эскиз</a><br>
             </div>
-            <div ng-show="dataObject.is_so">
-                <input type="checkbox" ng-model=dataObject.is_so disabled="disabled">Требуется согласование с заказчиком</input><br>
-            </div>
-            <div ng-show="dataObject.is_tr">
-                <input type="checkbox" ng-model=dataObject.is_tr disabled="disabled" ng-show="dataObject.is_tr">Требуется расчёт дополнительной трудоёмкости</input><br>
-            </div>
         </div>
-        <div ng-show=dataObject.ste(7)>
-            <hr>Загрузка документа согласования с заказчиком
-            <input type="file" accept=".pdf" cam-variable-name="SO_DOCUMENT" cam-variable-type="File"></input><br>
-        </div>
-        <div ng-show=dataObject.stg(7,dataObject.is_so)>
-            <hr><a cam-file-download="SO_DOCUMENT2">Согласование с заказчиком</a></div>
         <div ng-show=dataObject.ste(8)>
             <hr><b>Дополнительная трудоёмкость </b>
             <input type="text" name="trud" size="100" ng-model="dataObject.trud"> </div>

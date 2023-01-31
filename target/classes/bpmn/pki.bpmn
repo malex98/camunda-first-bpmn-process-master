@@ -4,9 +4,24 @@
     <bpmn:participant id="Participant_07k9gnj" name="ПКИ" processRef="PKI_Process" />
   </bpmn:collaboration>
   <bpmn:process id="PKI_Process" name="ПKИ" isExecutable="true" camunda:versionTag="1.0">
-    <bpmn:extensionElements />
-    <bpmn:startEvent id="PKI_start" name="Start" camunda:formKey="embedded:app:forms/pkiStart.html">
-      <bpmn:extensionElements />
+    <bpmn:startEvent id="PKI_start" name="Start">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="nomer" label="Номер ПКИ" type="string">
+            <camunda:validation />
+          </camunda:formField>
+          <camunda:formField id="process_step" label="Шаг" type="long" defaultValue="1">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="dataObject" label="Данные" type="PKI">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_00</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:exclusiveGateway id="PKI_gw2">
@@ -32,10 +47,12 @@
       <bpmn:incoming>Flow_l6</bpmn:incoming>
       <bpmn:outgoing>Flow_be5</bpmn:outgoing>
       <bpmn:outgoing>Flow_l5</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0defozl</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="PKI_gw6">
       <bpmn:incoming>Flow_5</bpmn:incoming>
       <bpmn:incoming>Flow_l7</bpmn:incoming>
+      <bpmn:incoming>Flow_0defozl</bpmn:incoming>
       <bpmn:outgoing>Flow_be6</bpmn:outgoing>
       <bpmn:outgoing>Flow_l6</bpmn:outgoing>
     </bpmn:exclusiveGateway>
@@ -44,13 +61,11 @@
       <bpmn:incoming>Flow_l8</bpmn:incoming>
       <bpmn:outgoing>Flow_be7l8</bpmn:outgoing>
       <bpmn:outgoing>Flow_l7</bpmn:outgoing>
-      <bpmn:outgoing>Flow_be9_1</bpmn:outgoing>
-      <bpmn:outgoing>Flow_be8l9</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="PKI_gw9">
       <bpmn:incoming>Flow_8</bpmn:incoming>
-      <bpmn:incoming>Flow_be9_1</bpmn:incoming>
       <bpmn:incoming>Flow_l10</bpmn:incoming>
+      <bpmn:incoming>Flow_047me9w</bpmn:incoming>
       <bpmn:outgoing>Flow_be9_2</bpmn:outgoing>
       <bpmn:outgoing>Flow_l9</bpmn:outgoing>
     </bpmn:exclusiveGateway>
@@ -103,11 +118,11 @@
       <bpmn:incoming>Flow_be4</bpmn:incoming>
       <bpmn:outgoing>Flow_4</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="PKI_Activity5" name="5) Технолог" camunda:formKey="embedded:app:forms/pki.html">
+    <bpmn:userTask id="PKI_Activity5" name="5) Согласование с заказчиком" camunda:formKey="embedded:app:forms/pki.html">
       <bpmn:incoming>Flow_be5</bpmn:incoming>
       <bpmn:outgoing>Flow_5</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="PKI_Activity6" name="6) Руководитель Тех.отдела" camunda:formKey="embedded:app:forms/pki.html">
+    <bpmn:userTask id="PKI_Activity6" name="6) Технолог" camunda:formKey="embedded:app:forms/pki.html">
       <bpmn:incoming>Flow_be6</bpmn:incoming>
       <bpmn:outgoing>Flow_6</bpmn:outgoing>
     </bpmn:userTask>
@@ -142,16 +157,16 @@
       <bpmn:incoming>Flow_be13</bpmn:incoming>
       <bpmn:outgoing>Flow_13</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_09g631m" name="7) Согласование с заказчиком" camunda:formKey="embedded:app:forms/pki.html">
+    <bpmn:userTask id="Activity_09g631m" name="7) Руководитель Тех.отдела" camunda:formKey="embedded:app:forms/pki.html">
       <bpmn:incoming>Flow_be7l8</bpmn:incoming>
       <bpmn:outgoing>Flow_7</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:exclusiveGateway id="PKI_gw8">
       <bpmn:incoming>Flow_7</bpmn:incoming>
       <bpmn:incoming>Flow_l9</bpmn:incoming>
-      <bpmn:incoming>Flow_be8l9</bpmn:incoming>
       <bpmn:outgoing>Flow_be8</bpmn:outgoing>
       <bpmn:outgoing>Flow_l8</bpmn:outgoing>
+      <bpmn:outgoing>Flow_047me9w</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="PKI_gw10">
       <bpmn:incoming>Flow_9</bpmn:incoming>
@@ -192,8 +207,8 @@
     <bpmn:sequenceFlow id="Flow_l6" name="&#60;6" sourceRef="PKI_gw6" targetRef="PKI_gw5">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&lt;6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_be5" name="&#62;=5" sourceRef="PKI_gw5" targetRef="PKI_Activity5">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=5}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="Flow_be5" name="&#62;=5 &#38; &#60; 6" sourceRef="PKI_gw5" targetRef="PKI_Activity5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=5 &amp;&amp; process_step &lt; 6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_5" sourceRef="PKI_Activity5" targetRef="PKI_gw6" />
     <bpmn:sequenceFlow id="Flow_l7" name="&#60;7" sourceRef="PKI_gw7" targetRef="PKI_gw6">
@@ -206,14 +221,8 @@
     <bpmn:sequenceFlow id="Flow_l8" name="&#60;8" sourceRef="PKI_gw8" targetRef="PKI_gw7">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&lt;8}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_be7l8" name="&#62;=7 &#38; &#60;8" sourceRef="PKI_gw7" targetRef="Activity_09g631m">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=7 &amp;&amp; process_step&lt;8}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_be9_1" name="&#62;=9" sourceRef="PKI_gw7" targetRef="PKI_gw9">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=9}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_be8l9" name="&#62;=8 &#38; &#60;9" sourceRef="PKI_gw7" targetRef="PKI_gw8">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=8 &amp;&amp; process_step&lt;9}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="Flow_be7l8" name="&#62;=7" sourceRef="PKI_gw7" targetRef="Activity_09g631m">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=7}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_8" sourceRef="PKI_Activity7" targetRef="PKI_gw9" />
     <bpmn:sequenceFlow id="Flow_l10" name="&#60;10" sourceRef="PKI_gw10" targetRef="PKI_gw9">
@@ -249,13 +258,19 @@
     <bpmn:sequenceFlow id="Flow_13" sourceRef="PKI_Task11" targetRef="PKI_Activity12" />
     <bpmn:sequenceFlow id="Flow_14" sourceRef="PKI_Activity12" targetRef="PKI_end" />
     <bpmn:sequenceFlow id="Flow_0" sourceRef="PKI_gw1" targetRef="PKI_Activity1" />
-    <bpmn:sequenceFlow id="Flow_be8" name="&#62;=8" sourceRef="PKI_gw8" targetRef="PKI_Activity7">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=8}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="Flow_be8" name="&#62;=8 &#38; &#60; 9" sourceRef="PKI_gw8" targetRef="PKI_Activity7">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=8 &amp;&amp; process_step&lt;9}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_9" sourceRef="PKI_Activity8" targetRef="PKI_gw10" />
     <bpmn:sequenceFlow id="Flow_7" sourceRef="Activity_09g631m" targetRef="PKI_gw8" />
     <bpmn:sequenceFlow id="Flow_be10" name="&#62;=10" sourceRef="PKI_gw10" targetRef="Activity_1phlamy">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=10}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0defozl" name="&#62;=6" sourceRef="PKI_gw5" targetRef="PKI_gw6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=6}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_047me9w" name="&#62;=9" sourceRef="PKI_gw8" targetRef="PKI_gw9">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${process_step&gt;=9}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -450,14 +465,14 @@
         <di:waypoint x="1339" y="340" />
         <di:waypoint x="1339" y="215" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1348" y="275" width="13" height="14" />
+          <dc:Bounds x="1383" y="323" width="13" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1rp5okg_di" bpmnElement="Flow_be5">
         <di:waypoint x="1364" y="190" />
         <di:waypoint x="1419" y="190" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1385" y="168" width="19" height="14" />
+          <dc:Bounds x="1365" y="168" width="49" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0sgcw4g_di" bpmnElement="Flow_5">
@@ -485,13 +500,11 @@
         <di:waypoint x="1469" y="555" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_130ievc_di" bpmnElement="Flow_l8">
-        <di:waypoint x="1351" y="733" />
-        <di:waypoint x="1399" y="790" />
-        <di:waypoint x="1559" y="790" />
-        <di:waypoint x="1559" y="670" />
-        <di:waypoint x="1482" y="593" />
+        <di:waypoint x="1339" y="695" />
+        <di:waypoint x="1339" y="580" />
+        <di:waypoint x="1444" y="580" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1473" y="772" width="13" height="14" />
+          <dc:Bounds x="1343" y="653" width="13" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1gm5hae_di" bpmnElement="Flow_be7l8">
@@ -499,22 +512,7 @@
         <di:waypoint x="1469" y="650" />
         <di:waypoint x="1469" y="680" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1476" y="658" width="45" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ivp1s4_di" bpmnElement="Flow_be9_1">
-        <di:waypoint x="1444" y="580" />
-        <di:waypoint x="1209" y="580" />
-        <di:waypoint x="1091" y="707" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1318" y="562" width="19" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0fb559l_di" bpmnElement="Flow_be8l9">
-        <di:waypoint x="1457" y="593" />
-        <di:waypoint x="1352" y="708" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1356" y="634" width="45" height="14" />
+          <dc:Bounds x="1489" y="658" width="19" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1lqvn6p_di" bpmnElement="Flow_8">
@@ -563,7 +561,7 @@
         <di:waypoint x="544" y="720" />
         <di:waypoint x="499" y="720" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="513" y="702" width="19" height="14" />
+          <dc:Bounds x="520" y="702" width="19" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12inosq_di" bpmnElement="Flow_l11">
@@ -622,7 +620,7 @@
         <di:waypoint x="1314" y="720" />
         <di:waypoint x="1259" y="720" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1277" y="702" width="19" height="14" />
+          <dc:Bounds x="1262" y="702" width="49" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1u7h1yn_di" bpmnElement="Flow_9">
@@ -638,6 +636,22 @@
         <di:waypoint x="739" y="720" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="754" y="702" width="26" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0defozl_di" bpmnElement="Flow_0defozl">
+        <di:waypoint x="1351" y="203" />
+        <di:waypoint x="1458" y="326" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1400" y="243" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_047me9w_di" bpmnElement="Flow_047me9w">
+        <di:waypoint x="1328" y="706" />
+        <di:waypoint x="1280" y="650" />
+        <di:waypoint x="1140" y="650" />
+        <di:waypoint x="1091" y="707" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1201" y="632" width="19" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
