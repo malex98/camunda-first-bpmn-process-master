@@ -3,8 +3,31 @@
   <script cam-script type="text/form-script">
     inject(['$rootScope', function($rootScope) {$scope.userName = $rootScope.authentication.name;}]);
     var dataObject = $scope.dataObject = {
-      employee: $scope.userName,
-      st: 1
+      st:"1",
+nomer:"Номер",
+naim:"",
+obozn:"",
+zakaz:"",
+material1:"",
+material2:"",
+kol1:"",
+kol2:"",
+stoim1:"",
+stoim2:"",
+itog1:"",
+itog2:"",
+to_zakl:"",
+to_sogl:"",
+peo_mat1:"",
+peo_mat2:"",
+peo_zar1:"",
+peo_zar2:"",
+tp:"",
+es:"",
+so:"",
+tr:"",
+trud:"",
+selected:"1"
     };
     camForm.on('form-loaded', function() {
       camForm.variableManager.createVariable({
@@ -15,6 +38,11 @@
           serializationDataFormat: 'application/json',
           objectTypeName: 'bpmn2.storm.backend.model.PKI'
         }
+      });
+      camForm.variableManager.createVariable({
+        name: 'st',
+        type: 'long',
+        value: 1
       });
     });
   </script>

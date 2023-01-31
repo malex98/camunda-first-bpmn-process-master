@@ -18,32 +18,35 @@
             $scope.userName = $rootScope.authentication.name;
         }]);
         $scope.ste = function(fun_step) {
-            return $scope.dataObject.st == fun_step;
+            return parseInt($scope.st,10) == fun_step;
 		};
 		$scope.stg = function(fun_step, b=true) {
-			return $scope.dataObject.st > fun_step && b;
+			return parseInt($scope.st,10) > fun_step && b;
 		};
 		camForm.on('form-loaded', function() {
             camForm.variableManager.fetchVariable('application');
+            camForm.variableManager.fetchVariable('st');
         });
         camForm.on('variables-restored', function() {
             $scope.dataObject = camForm.variableManager.variableValue('application');
-            switch($scope.dataObject.st) {
-                case 1: {$scope.items = [{id: 2, label: 'Подписать'}, {id: 0, label: 'Удалить'}]; break;}
-                case 2: {$scope.items = [{id: 3, label: 'Подписать'}, {id: 1, label: 'Вернуть на доработку инженеру ОМТС'}]; break;}
-                case 3: {$scope.items = [{id: 4, label: 'Подписать'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 4: {$scope.items = [{id: 5, label: 'Подписать'}, {id: 3, label: 'Вернуть на доработку конструктору'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 5: {$scope.items = [{id: 6, label: 'Подписать'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 6: {$scope.items = [{id: 7, label: 'Подписать'}, {id: 5, label: 'Вернуть на доработку технологу'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 7: {$scope.items = [{id: 8, label: 'Согласовано'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 8: {$scope.items = [{id: 9, label: 'Подписать'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 9: {$scope.items = [{id: 10, label: 'Подписать'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 10: {$scope.items = [{id: 11, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                case 11: {$scope.items = [{id: 12, label: 'Подписать'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
-                default: {$scope.items = [{id: 13, label: 'Утвердить'}, {id: 9, label: 'Вернуть на доработку в ПЭО'}, {id: 8, label: 'Вернуть на доработку в Группу нормирования'}, {id: 5, label: 'Вернуть на доработку в ТО'}, {id: 3, label: 'Вернуть на доработку в КО'}, {id: 1, label: 'Вернуть на доработку в ОМТС'}]; break;}
+            $scope.st = camForm.variableManager.variableValue('st');
+            switch($scope.st) {
+                case 1: {$scope.items = [{id: "2", label: 'Подписать'}, {id: 0, label: 'Удалить'}]; break;}
+                case 2: {$scope.items = [{id: "3", label: 'Подписать'}, {id: "1", label: 'Вернуть на доработку инженеру ОМТС'}]; break;}
+                case 3: {$scope.items = [{id: "4", label: 'Подписать'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 4: {$scope.items = [{id: "5", label: 'Подписать сразу после согласования'},{id: "6", label: 'Подписать, согласование не требуется'}, {id: "3", label: 'Вернуть на доработку конструктору'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 5: {$scope.items = [{id: "6", label: 'Согласовано'}, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 6: {$scope.items = [{id: "7", label: 'Подписать'}, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 7: {$scope.items = [{id: "9", label: 'Подписать, передать в ПЭО'}, {id: "8", label: 'Подписать, передать в группу нормирования'}, {id: "6", label: 'Вернуть на доработку технологу'},, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 8: {$scope.items = [{id: "9", label: 'Подписать'}, {id: "6", label: 'Вернуть на доработку в ТО'}, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 9: {$scope.items = [{id: "10", label: 'Подписать'}, {id: "8", label: 'Вернуть на доработку в Группу нормирования'}, {id: "6", label: 'Вернуть на доработку в ТО'}, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 10: {$scope.items = [{id: "11", label: 'Подписать'}, {id: "9", label: 'Вернуть на доработку в ПЭО'}, {id: "8", label: 'Вернуть на доработку в Группу нормирования'}, {id: "6", label: 'Вернуть на доработку в ТО'}, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                case 11: {$scope.items = [{id: "12", label: 'Подписать'}, {id: "9", label: 'Вернуть на доработку в ПЭО'}, {id: "8", label: 'Вернуть на доработку в Группу нормирования'}, {id: "6", label: 'Вернуть на доработку в ТО'}, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
+                default: {$scope.items = [{id: "13", label: 'Утвердить'}, {id: "9", label: 'Вернуть на доработку в ПЭО'}, {id: "8", label: 'Вернуть на доработку в Группу нормирования'}, {id: "6", label: 'Вернуть на доработку в ТО'}, {id: "3", label: 'Вернуть на доработку в КО'}, {id: "1", label: 'Вернуть на доработку в ОМТС'}]; break;}
             }
         });
     </script>
+    {{st}}<br>
     <b>Номер ПКИ: </b>{{dataObject.nomer}}<br>
     <div class="control-group" >
         <label class="control-label" for="zakaz">Номер заказа*</label>
@@ -91,16 +94,16 @@
                 <td>
                     <input type="text" ng-model="dataObject.kol1"> </td>
                 <td>
-                    <input type="number" ng-model="dataObject.stoim1"> </td>
+                    <input type="text" ng-model="stoim1"> </td>
                 <td>
-                    <input type="number" ng-model="dataObject.itog1"> </td>
+                    <input type="text" ng-model="dataObject.itog1"> </td>
             </tr>
             <tr ng-show=stg(1)>
                 <td>
                     <textarea ng-model="dataObject.material1" readonly></textarea>
                 </td>
                 <td>{{dataObject.kol1}}</td>
-                <td>{{dataObject.stoim1}}</td>
+                <td>{{stoim1}}</td>
                 <td>{{dataObject.itog1}}</td>
             </tr>
             <tr>
@@ -119,20 +122,26 @@
                 <td>
                     <input type="text" ng-model="dataObject.kol2"> </td>
                 <td>
-                    <input type="number" ng-model="dataObject.stoim2"> </td>
+                    <input type="text" ng-model="stoim2"> </td>
                 <td>
-                    <input type="number" ng-model="dataObject.itog2"> </td>
+                    <input type="text" ng-model="dataObject.itog2"> </td>
             </tr>
             <tr ng-show="stg(1)">
                 <td>
                     <textarea ng-model="dataObject.material2" readonly></textarea>
                 </td>
                 <td>{{dataObject.kol2}}</td>
-                <td>{{dataObject.stoim2}}</td>
+                <td>{{stoim2}}</td>
                 <td>{{dataObject.itog2}}</td>
             </tr>
         </table>
-        <div ng-show=dataObject.ste(5)>
+    <div ng-show=ste(5)>
+        <hr>Загрузка документа согласования с заказчиком
+        <input type="file" accept=".pdf" cam-variable-name="SO_DOCUMENT" cam-variable-type="File"></input><br>
+    </div>
+    <div ng-show=stg(5,dataObject.so)>
+        <hr><a cam-file-download="SO_DOCUMENT2">Согласование с заказчиком</a></div>
+    <div ng-show=ste(6)>
             <hr><b>Техническое заключение</b>
             <p>
                 <textarea rows="7" cols="80" name="text" ng-model="dataObject.to_zakl"></textarea>
@@ -141,40 +150,25 @@
             <br> Загрузка эскиза
             <input type="file" cam-variable-name="ES_DOCUMENT" cam-variable-type="File"></input>
             <br>
-            <input type="checkbox" ng-model=dataObject.is_so>Требуется согласование с заказчиком</input>
-            <br>
-            <input type="checkbox" ng-model=dataObject.is_tr>Требуется расчёт дополнительной трудоёмкости</input>
-            <br> </div>
-        <div ng-show=dataObject.stg(5)>
+            <input type="checkbox" ng-model=dataObject.so>Требуется согласование с заказчиком</input></div>
+        <div ng-show=stg(6)>
             <hr><b>Техническое заключение</b>
             <p>
                 <textarea rows="7" cols="80" name="text" ng-model="dataObject.to_zakl" readonly></textarea>
             </p>
-            <div ng-show="dataObject.is_tp">
+            <div ng-show="dataObject.tp">
                 <a cam-file-download="TP_DOCUMENT2">Тех.процесс</a><br>
             </div>
-            <div ng-show="dataObject.is_es">
+            <div ng-show="dataObject.es">
                 <a cam-file-download="ES_DOCUMENT2">Эскиз</a><br>
             </div>
-            <div ng-show="dataObject.is_so">
-                <input type="checkbox" ng-model=dataObject.is_so disabled="disabled">Требуется согласование с заказчиком</input><br>
-            </div>
-            <div ng-show="dataObject.is_tr">
-                <input type="checkbox" ng-model=dataObject.is_tr disabled="disabled" ng-show="dataObject.is_tr">Требуется расчёт дополнительной трудоёмкости</input><br>
-            </div>
         </div>
-        <div ng-show=dataObject.ste(7)>
-            <hr>Загрузка документа согласования с заказчиком
-            <input type="file" accept=".pdf" cam-variable-name="SO_DOCUMENT" cam-variable-type="File"></input><br>
-        </div>
-        <div ng-show=dataObject.stg(7,dataObject.is_so)>
-            <hr><a cam-file-download="SO_DOCUMENT2">Согласование с заказчиком</a></div>
-        <div ng-show=dataObject.ste(8)>
+        <div ng-show=ste(8)>
             <hr><b>Дополнительная трудоёмкость </b>
             <input type="text" name="trud" size="100" ng-model="dataObject.trud"> </div>
-        <div ng-show=dataObject.stg(8,dataObject.is_tr)>
+        <div ng-show=stg(8,dataObject.tr)>
             <hr><b>Дополнительная трудоёмкость </b>{{dataObject.trud}}</div>
-        <div ng-show=dataObject.stg(8)>
+        <div ng-show=stg(8)>
             <hr>
             <table>
                 <tr>
@@ -183,29 +177,29 @@
                     <th>ТОиМ</th>
                     <th>Итого</th>
                 </tr>
-                <tr ng-show=dataObject.ste(9)>
+                <tr ng-show=ste(9)>
                     <th>Материалы, руб</th>
                     <td>
-                        <input type="number" name="peo_mat1" ng-model="dataObject.peo_mat1"> </td>
+                        <input type="text" name="peo_mat1" ng-model="dataObject.peo_mat1"> </td>
                     <td>
-                        <input type="number" name="peo_mat2" ng-model="dataObject.peo_mat2"> </td>
+                        <input type="text" name="peo_mat2" ng-model="dataObject.peo_mat2"> </td>
                     <td>{{dataObject.peo_mat1+dataObject.peo_mat2}}</td>
                 </tr>
-                <tr ng-show=dataObject.stg(9)>
+                <tr ng-show=stg(9)>
                     <th>Материалы, руб</th>
                     <td>{{dataObject.peo_mat1}}</td>
                     <td>{{dataObject.peo_mat2}}</td>
                     <td>{{dataObject.peo_mat1+dataObject.peo_mat2}}</td>
                 </tr>
-                <tr ng-show=dataObject.ste(9)>
+                <tr ng-show=ste(9)>
                     <th>Заработная плата и<br>отчисления, руб</th>
                     <td>
-                        <input type="number" name="peo_zar1" ng-model="dataObject.peo_zar1"> </td>
+                        <input type="text" name="peo_zar1" ng-model="dataObject.peo_zar1"> </td>
                     <td>
-                        <input type="number" name="peo_zar2" ng-model="dataObject.peo_zar2"> </td>
+                        <input type="text" name="peo_zar2" ng-model="dataObject.peo_zar2"> </td>
                     <td>{{dataObject.peo_zar1+dataObject.peo_zar2}}</td>
                 </tr>
-                <tr ng-show=dataObject.stg(9)>
+                <tr ng-show=stg(9)>
                     <th>Заработная плата и<br>отчисления, руб</th>
                     <td>{{dataObject.peo_zar1}}</td>
                     <td>{{dataObject.peo_zar2}}</td>
@@ -221,6 +215,6 @@
         </div>
     <label class="control-label" for="choice">Выбор действия*</label>
     <div class="controls">
-        <select id="choice" ng-options="item as item.label for item in items track by item.id" ng-model="dataObject.selected" required></select>
+        <select id="choice" ng-options="item as item.label for item in items track by item.id" ng-model="dataObject.selected" onchange="st=this.options[this.selectedIndex].value" required></select>
     </div>
 </form>
