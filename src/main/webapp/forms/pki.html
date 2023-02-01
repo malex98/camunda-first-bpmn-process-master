@@ -26,10 +26,12 @@
 		camForm.on('form-loaded', function() {
             camForm.variableManager.fetchVariable('application');
             camForm.variableManager.fetchVariable('st');
+            camForm.variableManager.fetchVariable('selected');
         });
         camForm.on('variables-restored', function() {
             $scope.dataObject = camForm.variableManager.variableValue('application');
             $scope.st = camForm.variableManager.variableValue('st');
+            $scope.selected = camForm.variableManager.variableValue('selected');
             switch($scope.st) {
                 case 1: {$scope.items = [{id: "2", label: 'Подписать'}, {id: 0, label: 'Удалить'}]; break;}
                 case 2: {$scope.items = [{id: "3", label: 'Подписать'}, {id: "1", label: 'Вернуть на доработку инженеру ОМТС'}]; break;}
@@ -215,6 +217,6 @@
         </div>
     <label class="control-label" for="choice">Выбор действия*</label>
     <div class="controls">
-        <select id="choice" ng-options="item as item.label for item in items track by item.id" ng-model="dataObject.selected" onchange="st=this.options[this.selectedIndex].value" required></select>
+        <select id="choice" ng-options="item as item.label for item in items track by item.id" ng-model="selected" required><option value="">-нет-</option></select>
     </div>
 </form>
