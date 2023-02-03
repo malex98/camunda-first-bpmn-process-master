@@ -23,6 +23,9 @@
 		$scope.stg = function(fun_step, b=true) {
 			return parseInt($scope.st,10) > fun_step && b;
 		};
+		$scope.sts = function(fun) {
+			$scope.selected = fun;
+		};
 		camForm.on('form-loaded', function() {
             camForm.variableManager.fetchVariable('application');
             camForm.variableManager.fetchVariable('st');
@@ -48,7 +51,6 @@
             }
         });
     </script>
-    {{st}}<br>
     <b>Номер ПКИ: </b>{{dataObject.nomer}}<br>
     <div class="control-group" >
         <label class="control-label" for="zakaz">Номер заказа*</label>
@@ -217,6 +219,6 @@
         </div>
     <label class="control-label" for="choice">Выбор действия*</label>
     <div class="controls">
-        <select id="choice" ng-options="item as item.label for item in items track by item.id" ng-model="selected" required><option value="">-нет-</option></select>
+        <select id="choice" ng-options="item.id as item.label for item in items" ng-model="dataObject.selected" required></select>
     </div>
 </form>
