@@ -16,18 +16,17 @@ data class PKI (
     val stoim1: String = "",//Стоимость (цена) материала что меняем
     val stoim2: String = "",//Стоимость (цена) материала на что меняем
     val itog1:  String = "",//Стоимость (итог) материала что меняем
-    val itog2:  String = "",////Стоимость (итог) материала на что меняем
+    val itog2:  String = "",//Стоимость (итог) материала на что меняем
     val to_zakl: String = "",
     val to_sogl: String = "",
-    val peo_mat1: String = "",
-    val peo_mat2: String = "",
-    val peo_zar1: String = "",
-    val peo_zar2: String = "",
+    val peo_mat1: Double,
+    val peo_mat2: Double,
+    val peo_zar1: Double,
+    val peo_zar2: Double,
     val tp: String = "",
     val es: String = "",
     val so: String = "",
     val tr: String = "",
-    val trud: String = "",
-    var selected: String = "1"
+    val trud: String = ""
 )
 

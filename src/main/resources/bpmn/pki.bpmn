@@ -166,7 +166,7 @@
     <bpmn:sequenceFlow id="Flow_1" sourceRef="PKI_Activity1" targetRef="PKI_gw2">
       <bpmn:extensionElements>
         <camunda:executionListener event="start">
-          <camunda:script scriptFormat="groovy">execution.setVariable('st', execution.getVariable('selected'))</camunda:script>
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
         </camunda:executionListener>
       </bpmn:extensionElements>
     </bpmn:sequenceFlow>
@@ -176,7 +176,13 @@
     <bpmn:sequenceFlow id="Flow_l2" name="&#60;2" sourceRef="PKI_gw2" targetRef="Activity_1wgv4qb">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;2}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_2" sourceRef="PKI_Activity2" targetRef="PKI_gw3" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="PKI_Activity2" targetRef="PKI_gw3" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l4" name="&#60;4" sourceRef="PKI_gw4" targetRef="PKI_gw3">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;4}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -186,14 +192,26 @@
     <bpmn:sequenceFlow id="Flow_l3" name="&#60;3" sourceRef="PKI_gw3" targetRef="PKI_gw1">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;3}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_3" sourceRef="PKI_Activity3" targetRef="PKI_gw4" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="PKI_Activity3" targetRef="PKI_gw4" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l5" name="&#60;5" sourceRef="PKI_gw5" targetRef="PKI_gw4">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;5}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_be4" name="&#62;=4" sourceRef="PKI_gw4" targetRef="PKI_Activity4">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&gt;=4}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_4" sourceRef="PKI_Activity4" targetRef="PKI_gw5" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="PKI_Activity4" targetRef="PKI_gw5" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l6" name="&#60;6" sourceRef="PKI_gw6" targetRef="PKI_gw5">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -203,21 +221,39 @@
     <bpmn:sequenceFlow id="Flow_0defozl" name="&#62;=6" sourceRef="PKI_gw5" targetRef="PKI_gw6">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&gt;=6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_5" sourceRef="PKI_Activity5" targetRef="PKI_gw6" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="PKI_Activity5" targetRef="PKI_gw6" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l7" name="&#60;7" sourceRef="PKI_gw7" targetRef="PKI_gw6">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;7}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_be6" name="&#62;=6" sourceRef="PKI_gw6" targetRef="PKI_Activity6">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&gt;=6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_6" sourceRef="PKI_Activity6" targetRef="PKI_gw7" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="PKI_Activity6" targetRef="PKI_gw7" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l8" name="&#60;8" sourceRef="PKI_gw8" targetRef="PKI_gw7">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;8}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_be7l8" name="&#62;=7" sourceRef="PKI_gw7" targetRef="Activity_09g631m">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&gt;=7}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_8" sourceRef="PKI_Activity7" targetRef="PKI_gw9" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="PKI_Activity7" targetRef="PKI_gw9" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l10" name="&#60;10" sourceRef="PKI_gw10" targetRef="PKI_gw9">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;10}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -230,7 +266,13 @@
     <bpmn:sequenceFlow id="Flow_l9" name="&#60;9" sourceRef="PKI_gw9" targetRef="PKI_gw8">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;9}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_10" sourceRef="Activity_1phlamy" targetRef="PKI_gw11" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Activity_1phlamy" targetRef="PKI_gw11" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l12" name="&#60;12" sourceRef="PKI_gw12" targetRef="PKI_gw11">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;12}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -240,7 +282,13 @@
     <bpmn:sequenceFlow id="Flow_l11" name="&#60;11" sourceRef="PKI_gw11" targetRef="PKI_gw10">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;11}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_11" sourceRef="PKI_Activity9" targetRef="PKI_gw12" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="PKI_Activity9" targetRef="PKI_gw12" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_l13" name="&#60;13" sourceRef="PKI_gw13" targetRef="PKI_gw12">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&lt;13}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -251,14 +299,38 @@
     <bpmn:sequenceFlow id="Flow_be13" name="=&#62;13" sourceRef="PKI_gw13" targetRef="PKI_Task11">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&gt;=13}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_13" sourceRef="PKI_Task11" targetRef="PKI_Activity12" />
-    <bpmn:sequenceFlow id="Flow_14" sourceRef="PKI_Activity12" targetRef="PKI_end" />
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="PKI_Task11" targetRef="PKI_Activity12" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="PKI_Activity12" targetRef="PKI_end" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0" sourceRef="PKI_gw1" targetRef="PKI_Activity1" />
     <bpmn:sequenceFlow id="Flow_be8" name="&#62;=8 &#38; &#60; 9" sourceRef="PKI_gw8" targetRef="PKI_Activity7">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&gt;=8 &amp;&amp; st&lt;9}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_9" sourceRef="PKI_Activity8" targetRef="PKI_gw10" />
-    <bpmn:sequenceFlow id="Flow_7" sourceRef="Activity_09g631m" targetRef="PKI_gw8" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="PKI_Activity8" targetRef="PKI_gw10" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Activity_09g631m" targetRef="PKI_gw8" >
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setVariable('st', Long.valueOf(execution.getVariable('application').st));</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_be10" name="&#62;=10" sourceRef="PKI_gw10" targetRef="Activity_1phlamy">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${st&gt;=10}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>

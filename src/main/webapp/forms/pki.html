@@ -23,6 +23,9 @@
 		$scope.stg = function(fun_step, b=true) {
 			return parseInt($scope.st,10) > fun_step && b;
 		};
+		$scope.sts = function(fun) {
+			$scope.selected = fun;
+		};
 		camForm.on('form-loaded', function() {
             camForm.variableManager.fetchVariable('application');
             camForm.variableManager.fetchVariable('st');
@@ -31,7 +34,6 @@
         camForm.on('variables-restored', function() {
             $scope.dataObject = camForm.variableManager.variableValue('application');
             $scope.st = camForm.variableManager.variableValue('st');
-            $scope.selected = camForm.variableManager.variableValue('selected');
             switch($scope.st) {
                 case 1: {$scope.items = [{id: "2", label: 'Подписать'}, {id: 0, label: 'Удалить'}]; break;}
                 case 2: {$scope.items = [{id: "3", label: 'Подписать'}, {id: "1", label: 'Вернуть на доработку инженеру ОМТС'}]; break;}
@@ -48,34 +50,39 @@
             }
         });
     </script>
-    {{st}}<br>
     <b>Номер ПКИ: </b>{{dataObject.nomer}}<br>
-    <div class="control-group" >
-        <label class="control-label" for="zakaz">Номер заказа*</label>
-        <div class="controls">
-            <input id="zakaz"
-                   class="form-control"
-                   type="text"
-                   required
-                   ng-model="dataObject.zakaz">
+    <div class="control-group">
+        <div ng-show=ste(1)>
+            <label class="control-label" for="zakaz">Номер заказа*</label>
+            <div class="controls">
+                <input id="zakaz"
+                       class="form-control"
+                       type="text"
+                       required
+                       ng-model="dataObject.zakaz">
+            </div>
+            <br>
+            <label class="control-label" for="obozn">Обозначение изделия:*</label>
+            <div class="controls">
+                <input id="obozn"
+                       class="form-control"
+                       type="text"
+                       required
+                       ng-model="dataObject.obozn">
+            </div>
+            <br>
+            <label class="control-label" for="naim">Наименование изделия:*</label>
+            <div class="controls">
+                <input id="naim"
+                       class="form-control"
+                       type="text"
+                       required
+                       ng-model="dataObject.naim">
+            </div>
         </div>
-        <br>
-        <label class="control-label" for="obozn">Обозначение изделия:*</label>
-        <div class="controls">
-            <input id="obozn"
-                   class="form-control"
-                   type="text"
-                   required
-                   ng-model="dataObject.obozn">
-        </div>
-        <br>
-        <label class="control-label" for="naim">Наименование изделия:*</label>
-        <div class="controls">
-            <input id="naim"
-                   class="form-control"
-                   type="text"
-                   required
-                   ng-model="dataObject.naim">
+        <div ng-show=stg(1)>
+            <b>Наименование изделия: </b>{{dataObject.naim}}<br>
+            <b>Обозначение изделия: </b>{{dataObject.obozn}} <b>Заказ </b>{{dataObject.zakaz}}<br>
         </div>
         <br>
         </div>
@@ -96,7 +103,7 @@
                 <td>
                     <input type="text" ng-model="dataObject.kol1"> </td>
                 <td>
-                    <input type="text" ng-model="stoim1"> </td>
+                    <input type="text" ng-model="dataObject.stoim1"> </td>
                 <td>
                     <input type="text" ng-model="dataObject.itog1"> </td>
             </tr>
@@ -105,7 +112,7 @@
                     <textarea ng-model="dataObject.material1" readonly></textarea>
                 </td>
                 <td>{{dataObject.kol1}}</td>
-                <td>{{stoim1}}</td>
+                <td>{{dataObject.stoim1}}</td>
                 <td>{{dataObject.itog1}}</td>
             </tr>
             <tr>
@@ -124,7 +131,7 @@
                 <td>
                     <input type="text" ng-model="dataObject.kol2"> </td>
                 <td>
-                    <input type="text" ng-model="stoim2"> </td>
+                    <input type="text" ng-model="dataObject.stoim2"> </td>
                 <td>
                     <input type="text" ng-model="dataObject.itog2"> </td>
             </tr>
@@ -133,7 +140,7 @@
                     <textarea ng-model="dataObject.material2" readonly></textarea>
                 </td>
                 <td>{{dataObject.kol2}}</td>
-                <td>{{stoim2}}</td>
+                <td>{{dataObject.stoim2}}</td>
                 <td>{{dataObject.itog2}}</td>
             </tr>
         </table>
@@ -151,8 +158,7 @@
             <input type="file" accept=".pdf" cam-variable-name="TP_DOCUMENT" cam-variable-type="File"></input>
             <br> Загрузка эскиза
             <input type="file" cam-variable-name="ES_DOCUMENT" cam-variable-type="File"></input>
-            <br>
-            <input type="checkbox" ng-model=dataObject.so>Требуется согласование с заказчиком</input></div>
+            </div>
         <div ng-show=stg(6)>
             <hr><b>Техническое заключение</b>
             <p>
@@ -182,9 +188,9 @@
                 <tr ng-show=ste(9)>
                     <th>Материалы, руб</th>
                     <td>
-                        <input type="text" name="peo_mat1" ng-model="dataObject.peo_mat1"> </td>
+                        <input type="number" name="peo_mat1" ng-model="dataObject.peo_mat1"> </td>
                     <td>
-                        <input type="text" name="peo_mat2" ng-model="dataObject.peo_mat2"> </td>
+                        <input type="number" name="peo_mat2" ng-model="dataObject.peo_mat2"> </td>
                     <td>{{dataObject.peo_mat1+dataObject.peo_mat2}}</td>
                 </tr>
                 <tr ng-show=stg(9)>
@@ -196,9 +202,9 @@
                 <tr ng-show=ste(9)>
                     <th>Заработная плата и<br>отчисления, руб</th>
                     <td>
-                        <input type="text" name="peo_zar1" ng-model="dataObject.peo_zar1"> </td>
+                        <input type="number" name="peo_zar1" ng-model="dataObject.peo_zar1"> </td>
                     <td>
-                        <input type="text" name="peo_zar2" ng-model="dataObject.peo_zar2"> </td>
+                        <input type="number" name="peo_zar2" ng-model="dataObject.peo_zar2"> </td>
                     <td>{{dataObject.peo_zar1+dataObject.peo_zar2}}</td>
                 </tr>
                 <tr ng-show=stg(9)>
@@ -217,6 +223,6 @@
         </div>
     <label class="control-label" for="choice">Выбор действия*</label>
     <div class="controls">
-        <select id="choice" ng-options="item as item.label for item in items track by item.id" ng-model="selected" required><option value="">-нет-</option></select>
+        <select id="choice" ng-options="item.id as item.label for item in items" ng-model="dataObject.st" required></select>
     </div>
 </form>

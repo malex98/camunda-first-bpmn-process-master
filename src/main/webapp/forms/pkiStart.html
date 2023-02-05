@@ -18,16 +18,15 @@ itog1:"",
 itog2:"",
 to_zakl:"",
 to_sogl:"",
-peo_mat1:"",
-peo_mat2:"",
-peo_zar1:"",
-peo_zar2:"",
+peo_mat1:0,
+peo_mat2:0,
+peo_zar1:0,
+peo_zar2:0,
 tp:"",
 es:"",
 so:"",
 tr:"",
-trud:"",
-selected:"1"
+trud:""
     };
     camForm.on('form-loaded', function() {
       camForm.variableManager.createVariable({
@@ -41,11 +40,6 @@ selected:"1"
       });
       camForm.variableManager.createVariable({
         name: 'st',
-        type: 'long',
-        value: 1
-      });
-      camForm.variableManager.createVariable({
-        name: 'selected',
         type: 'long',
         value: 1
       });
