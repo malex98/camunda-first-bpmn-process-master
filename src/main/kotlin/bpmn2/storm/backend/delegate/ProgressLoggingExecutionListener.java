@@ -44,9 +44,9 @@ public class ProgressLoggingExecutionListener implements ExecutionListener {
 
     public void notify(DelegateExecution execution) throws Exception {
         PKI application = (PKI)execution.getVariable("application");
-        application.setSt(application.getSelected());
-        long lst = Integer.getInteger(application.getSelected().toString()) + 1;
-        application.setSelected(Long.toString(lst));
+        application.setSt(application.getSt());
+        long lst = Integer.getInteger(application.getSt().toString()) + 1;
+        application.setSt(Long.toString(lst));
         execution.setVariable("st",lst);
 
         progressValueList.add(propertyValue);

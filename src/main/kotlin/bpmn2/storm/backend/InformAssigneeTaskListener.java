@@ -26,9 +26,9 @@ public class InformAssigneeTaskListener implements TaskListener {
 
     public void notify(DelegateTask delegateTask) {
         PKI application = (PKI)delegateTask.getVariable("application");
-        application.setSt(application.getSelected());
-        long lst = Integer.getInteger(application.getSelected().toString()) + 1;
-        application.setSelected(Long.toString(lst));
+        //application.setSt(application.getSelected());
+        long lst = Integer.getInteger(application.getSt().toString()) + 1;
+        application.setSt(Long.toString(lst));
         delegateTask.setVariable("st",lst);
 
         String assignee = delegateTask.getAssignee();

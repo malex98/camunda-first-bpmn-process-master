@@ -30,9 +30,9 @@ class MonitorDelegate: JavaDelegate {
 
     override fun execute(execution: DelegateExecution) {
         val application = execution.getVariable("application") as PKI
-        val lst = application.selected.toLong() + 1
-        application.st = application.selected
-        application.selected = lst.toString()
+        val lst = application.st.toLong() + 1
+        application.st = application.st
+        application.st = lst.toString()
         val st = execution.setVariable("application",lst)
 
         /*val emailTo = execution.processEngineServices.identityService.createUserQuery().userId(application.employee)?.singleResult()?.email
