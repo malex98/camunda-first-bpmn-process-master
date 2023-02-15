@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @EnableProcessApplication
+	//("springboot-customized-webapp-example")
 @SpringBootApplication
 class BackendApplication
 
